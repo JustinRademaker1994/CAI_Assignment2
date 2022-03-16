@@ -29,6 +29,7 @@ class BaseLineAgent(BW4TBrain):
             action_set=self.action_set, algorithm=Navigator.A_STAR_ALGORITHM)
 
     def filter_bw4t_observations(self, state):
+        print("This code in inside the filter_bw4t_observations method")
         return state
 
     def decide_on_bw4t_action(self, state:State):
@@ -45,8 +46,7 @@ class BaseLineAgent(BW4TBrain):
         while True:
             if Phase.PLAN_PATH_TO_CLOSED_DOOR==self._phase:
                 self._navigator.reset_full()
-                closedDoors = [door for door in state.values()
-                    if 'class_inheritance' in door and 'Door' in door['class_inheritance'] and not door['is_open']]
+                closedDoors = [door for door in state.values() if 'class_inheritance' in door and 'Door' in door['class_inheritance'] and not door['is_open']]
                 if len(closedDoors)==0:
                     return None, {}
                 # Randomly pick a closed door
